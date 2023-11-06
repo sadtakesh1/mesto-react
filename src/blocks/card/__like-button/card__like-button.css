@@ -1,0 +1,15 @@
+.card__like-button {
+  max-width: 22px;
+  width: 100%;
+  height: 19px;
+  background-image: url(../../../image/ui-kit/hearth-disabled.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
+}
