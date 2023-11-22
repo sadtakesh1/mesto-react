@@ -23,7 +23,7 @@ function PopupWithForm({
     } else {
       document.removeEventListener("keydown", handleEscKeydown); //x123
     }
-    // вешаешь обработчик на document keydown
+
   }, [isOpen]);
 
   return (
