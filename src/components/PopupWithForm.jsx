@@ -7,13 +7,12 @@ function PopupWithForm({
   onClose,
   submitButtontext = "Сохранить",
   children,
+  onSubmit
 }) {
   //пишешь функцию для установки слушателя на esc вызывающий onClose
 
-
-
   const handleEscKeydown = useCallback((event) => {
-    if(event.key === 'Escape') {
+    if (event.key === "Escape") {
       onClose();
     }
   }, []);
@@ -38,7 +37,12 @@ function PopupWithForm({
           type="button"
           onClick={onClose}
         ></button>
-        <form className={`popup__form popup__form_${name}`}>
+        <form
+          action="#"
+          name={name}
+          onSubmit={onSubmit}
+          className={`popup__form popup__form_${name}`}
+        >
           {children}
           <button className="popup__save-button" type="submit">
             {submitButtontext}

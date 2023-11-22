@@ -2,6 +2,7 @@ class Api {
   constructor({ baseUrl, headers }) {
     this._url = baseUrl;
     this._headers = headers;
+    this._authorizationToken = headers.authorization;
   }
 
   _checkResponse(response) {
@@ -13,25 +14,27 @@ class Api {
 
   getDataCards() {
     return fetch(`${this._url}/cards`, {
-      method: "GET",
-      headers: this._headers,
+      headers: {
+        authorization: this._authorizationToken,
+      },
     }).then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
-      method: "GET",
-      headers: this._headers,
+      headers: {
+        authorization: this._authorizationToken,
+      },
     }).then(this._checkResponse);
   }
 
-  editUserProfile({ userName, aboutUser }) {
+  editUserProfile({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: `${userName}`,
-        about: `${aboutUser}`,
+        name: `${name}`,
+        about: `${about}`,
       }),
     }).then(this._checkResponse);
   }
@@ -50,21 +53,18 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        authorization: this._authorizationToken,
+      },
     }).then(this._checkResponse);
   }
 
-  putLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-
-  removeLike(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: "DELETE",
-      headers: this._headers,
+      method: `${isLiked ? "PUT" : "DELETE"}`,
+      headers: {
+        authorization: this._authorizationToken,
+      },
     }).then(this._checkResponse);
   }
 

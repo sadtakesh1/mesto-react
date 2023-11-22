@@ -9,7 +9,11 @@ function ImagePopup({ card, onClose }) {
           type="button"
           onClick={onClose}
         />
-        <img className="popup__image" src={`${card?.link}`} alt={`${card?.name}`} />
+        <img
+          className="popup__image"
+          src={`${card?.link}`}
+          alt={`${card?.name}`}
+        />
         <h2 className="popup__title popup__title_image" />
       </div>
     </div>
